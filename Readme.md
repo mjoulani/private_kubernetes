@@ -1,94 +1,134 @@
-create our oun cluster with our own Proxmox server.
+# Create Our Own Cluster with Proxmox Server
 
-create minimum two instances Ubuntu
-create ssh key:
-1. open in your host machine a terminal     in my case ubuntu
-2. Run the command ssh keygen -b 4096 give name for key and the path in my case I stored in ~/.ssh/
+## Create Minimum Two Instances of Ubuntu
 
-Example:
+### Create SSH Key:
 
-   linux ubuntu : ssh-keygen -b 4096 -f ~/.ssh/\<give name for file\>
-   windows: ssh-keygen -b 4096 -f C:\Users\<your user name\>\.ssh\<give name for file\>
-   note: in linux or windows must install 
-   openssh-client:
-```bash
-   sudo apt update
-   sudo apt install openssh-server
-   sudo apt install openssh-client
+1. Open a terminal on your host machine (Ubuntu in my case).
+2. Run the command `ssh-keygen -b 4096` and provide a name for the key and the path. In my case, I stored it in `~/.ssh/`.
 
-   sudo systemctl start ssh
-   sudo systemctl enable ssh
-   sudo systemctl status ssh
+**Example:**
 
-perl
+- **Linux Ubuntu:**
+    <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
+- **Windows:**
+    <pre><code>ssh-keygen -b 4096 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
+**Note:** Make sure OpenSSH client is installed on both Linux and Windows:
 
+<pre><code>sudo apt update
+sudo apt install openssh-server
+sudo apt install openssh-client
 
-3. after the pair key created public and private we need to copy the public key to our instances the master and the node1 ... the command to do this : ssh-copy-id <<instances name>></instances>>@<the ip for the instances> in my case mjoulani@192.168.68.124
-4. make backup or snapshot before you start use the Proxmox console  
+sudo systemctl start ssh
+sudo systemctl enable ssh
+sudo systemctl status ssh</code></pre>
 
-Let's start creating the cluster:
-1. connect to the master node also the node1
-2. Run the command disable swap for all instances : sudo swapoff -a 
-3. edit the /etc/fstab to cancel the swap: sudo nano /etc/fstab 
-commit this line : #/swap.img
-4. install docker : sudo apt  install docker.io  -y
-5. make docker to sudo group in my case : newgrp docker and sudo usermod -aG docker mjoulani and sudo chmod 666 /var/run/docker.sock
-6. install curl: in my case it is install check by running : curl --version
-7. Merging  Kubernetes community(master controller and node):
-   you find all the Documentation by visiting https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/
+### Copy the Public Key to Your Instances:
 
-   a. echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list
+After creating the public and private key pair, copy the public key to your instances (master and node1) using the following command:
 
-   b. curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
-   c. sudo apt update 
+<pre><code>ssh-copy-id &lt;instance-name&gt;@&lt;instance-ip&gt;</code></pre>
 
-8. installing kubernetes component:
-   sudo apt install kubeadm kubelet kubectl kubernetes-cni -y
-9. Creating a cluster with kubeadm:
-10. visit the docuamention wedsit for more information --- https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/
-11. Setup the master controller node:
-    a. ip route show # Look for a line starting with "default via"
+For example:
 
-    b. sudo kubeadm init 
-    
-    c. mkdir -p $HOME/.kube
+<pre><code>ssh-copy-id mjoulani@192.168.68.124</code></pre>
 
-    d. sudo cp -i /etc/kubernetes/admin.   conf $HOME/.kube/config
-    e. sudo chown $(id -u):$(id -g) $HOME/.kube/config
+### Backup or Snapshot:
 
-    Alternatively, if you are the root user, you can run:
+Make a backup or snapshot before you start using the Proxmox console.
 
-    export KUBECONFIG=/etc/kubernetes/admin.conf
-    f. kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml
-    kubectl get pods -n kube-system
-    kubectl get nodes
-    note: wait for 5 min less or more until the nodes be ready
-    visit https://docs.tigera.io/
+## Start Creating the Cluster:
 
-    https://github.com/projectcalico/calico/blob/master/manifests/calico.yaml
+1. Connect to the master node and node1.
+2. Disable swap for all instances:
+    <pre><code>sudo swapoff -a</code></pre>
 
-12. Setup the working node:
-    Let's join the cluster:
-    sudo  kubeadm join <control-plane-host>:<control-plane-port> --token <token> --discovery-token-ca-cert-hash sha256:<hash> 
-    how i cna get this info ?
-     when you run the init command you will get the join command with the token.
-13. Managed node labels:
-14. 
-    a.  kubectl label nodes node1 role=worker-one
-    
-    b. kubectl get nodes --show-labels
+3. Edit `/etc/fstab` to disable swap:
+    <pre><code>sudo nano /etc/fstab</code></pre>
+    Comment out the swap line by adding `#` at the beginning:
+    <pre><code>#/swap.img</code></pre>
 
-    alternative:
-    add labels:
-    kubectl label nodes node1 node-role.kubernetes.io/<name of the labels>=
+4. Install Docker:
+    <pre><code>sudo apt install docker.io -y</code></pre>
 
-    show labels:
-    kubectl get nodes --show-labels
+5. Add your user to the Docker group:
+    <pre><code>newgrp docker
+sudo usermod -aG docker mjoulani
+sudo chmod 666 /var/run/docker.sock</code></pre>
 
-    remove labels:
-    kubectl label nodes node1 node-role.kubernetes.io/<name of the labels>-
+6. Install `curl` (if not already installed):
+    <pre><code>curl --version</code></pre>
+
+7. Merge Kubernetes Community (Master Controller and Node):
+    Find the documentation here: <a href="https://kubernetes.io/blog/2023/08/15/pkgs-k8s-io-introduction/">Kubernetes Documentation</a>
+
+    a. Add Kubernetes APT repository:
+        <pre><code>echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v1.28/deb/ /" | sudo tee /etc/apt/sources.list.d/kubernetes.list</code></pre>
+
+    b. Add Kubernetes GPG key:
+        <pre><code>curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg</code></pre>
+
+    c. Update package list:
+        <pre><code>sudo apt update</code></pre>
+
+8. Install Kubernetes components:
+    <pre><code>sudo apt install kubeadm kubelet kubectl kubernetes-cni -y</code></pre>
+
+9. Create a cluster with `kubeadm`. For more information, visit: <a href="https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/create-cluster-kubeadm/">Kubeadm Documentation</a>
+
+10. Setup the Master Controller Node:
+
+    a. Show default route:
+        <pre><code>ip route show</code></pre>
+
+    b. Initialize the Kubernetes master:
+        <pre><code>sudo kubeadm init</code></pre>
+
+    c. Configure kubectl:
+        <pre><code>mkdir -p $HOME/.kube
+sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
+
+    Alternatively, as root:
+        <pre><code>export KUBECONFIG=/etc/kubernetes/admin.conf</code></pre>
+
+    d. Apply Calico networking:
+        <pre><code>kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml</code></pre>
+
+    e. Check the status:
+        <pre><code>kubectl get pods -n kube-system
+kubectl get nodes</code></pre>
+        Note: Wait for 5 minutes or more until the nodes are ready. Visit <a href="https://docs.tigera.io/">Tigera Documentation</a> and <a href="https://github.com/projectcalico/calico/blob/master/manifests/calico.yaml">Calico Manifest</a>.
+
+11. Setup the Worker Node:
+
+    Join the cluster using the command provided by `kubeadm init`:
+    <pre><code>sudo kubeadm join &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</code></pre>
+
+12. Manage Node Labels:
+
+    a. Add a label to a node:
+        <pre><code>kubectl label nodes node1 role=worker-one</code></pre>
+
+    b. List nodes with labels:
+        <pre><code>kubectl get nodes --show-labels</code></pre>
+
+    Alternatively, you can:
+
+    - **Add Labels:**
+        <pre><code>kubectl label nodes node1 node-role.kubernetes.io/&lt;name-of-label&gt;=</code></pre>
+
+    - **Show Labels:**
+        <pre><code>kubectl get nodes --show-labels</code></pre>
+
+    - **Remove Labels:**
+        <pre><code>kubectl label nodes node1 node-role.kubernetes.io/&lt;name-of-label&gt;-</code></pre>
+
+**Notes:**
+- Ensure to replace placeholders like `<control-plane-host>`, `<control-plane-port>`, `<token>`, and `<hash>` with your actual values.
+- The HTML used here is for formatting and will be rendered correctly on GitHub, but JavaScript will not run.
 
 
 
