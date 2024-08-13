@@ -7,8 +7,8 @@ create ssh key:
 
 Example:
 
-   linux ubuntu : ssh-keygen -b 4096 -f ~/.ssh/<give name for file>
-   windows: ssh-keygen -b 4096 -f C:\Users<your user name>\.ssh\<give name for file>
+   linux ubuntu : ssh-keygen -b 4096 -f ~/.ssh/\<give name for file\>
+   windows: ssh-keygen -b 4096 -f C:\Users\<your user name\>\.ssh\<give name for file\>
    note: in linux or windows must install 
    openssh-client:
 
