@@ -4,7 +4,22 @@ create minimum two instances Ubuntu
 create ssh key:
 1. open in your host machine a terminal     in my case ubuntu
 2. Run the command ssh keygen -b 4096 give name for key and the path in my case I stored in ~/.ssh/
-3. after the pair key created public and private we need to copy the public key to our instances the master and the node1 ... the command to do this : ssh-copy-id <instances name>@<the ip for the instances> in my case mjoulani@192.168.68.124
+Example: 
+   linux ubuntu : ssh-keygen -b 4096 -f ~/.ssh/<give name for file>
+   windows: ssh-keygen -b 4096 -f C:\Users<your user name>\.ssh\<give name for file>
+   note: in linux or windows must install 
+   openssh-client
+   sudo apt update
+   sudo apt install openssh-server
+   sudo apt install openssh-client
+
+   sudo systemctl start ssh
+   sudo systemctl enable ssh
+   sudo systemctl status ssh
+
+
+
+3. after the pair key created public and private we need to copy the public key to our instances the master and the node1 ... the command to do this : ssh-copy-id <<instances name>></instances>>@<the ip for the instances> in my case mjoulani@192.168.68.124
 4. make backup or snapshot before you start use the Proxmox console  
 
 Let's start creating the cluster:
