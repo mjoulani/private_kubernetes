@@ -4,18 +4,21 @@ create minimum two instances Ubuntu
 create ssh key:
 1. open in your host machine a terminal     in my case ubuntu
 2. Run the command ssh keygen -b 4096 give name for key and the path in my case I stored in ~/.ssh/
-Example: 
+
+Example:
+
    linux ubuntu : ssh-keygen -b 4096 -f ~/.ssh/<give name for file>
    windows: ssh-keygen -b 4096 -f C:\Users<your user name>\.ssh\<give name for file>
    note: in linux or windows must install 
-   openssh-client
-   sudo apt update
-   sudo apt install openssh-server
-   sudo apt install openssh-client
+   openssh-client:
 
-   sudo systemctl start ssh
-   sudo systemctl enable ssh
-   sudo systemctl status ssh
+   *.sudo apt update
+   *.sudo apt install openssh-server
+   *.sudo apt install openssh-client
+
+   *.sudo systemctl start ssh
+   *.sudo systemctl enable ssh
+   *.sudo systemctl status ssh
 
 
 
