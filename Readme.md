@@ -11,14 +11,15 @@ Example:
    windows: ssh-keygen -b 4096 -f C:\Users\<your user name\>\.ssh\<give name for file\>
    note: in linux or windows must install 
    openssh-client:
+   ```bash
+   - sudo apt update
+   - sudo apt install openssh-server
+   - sudo apt install openssh-client
 
-   *.sudo apt update
-   *.sudo apt install openssh-server
-   *.sudo apt install openssh-client
-
-   *.sudo systemctl start ssh
-   *.sudo systemctl enable ssh
-   *.sudo systemctl status ssh
+   - sudo systemctl start ssh
+   - sudo systemctl enable ssh
+   - sudo systemctl status ssh
+   csharp
 
 
 
