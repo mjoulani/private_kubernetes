@@ -14,7 +14,7 @@
 
 - **Windows:**
 -   <pre>The key will be created in the default setting in the folder C:\Users\&lt;your-username&gt;\.ssh</pre>
--   <pre style="font-size: 16px; color: blue;"><code>ssh-keygen -t  ed25519 </code></pre>
+-   <pre style="font-size: 20px; color: red;"><code>ssh-keygen -t  ed25519 </code></pre>
 -   
 -   <pre style="font-size: 16px; color: blue;">Create in specific name and path</pre>  
     <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
