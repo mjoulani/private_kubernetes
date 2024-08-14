@@ -11,9 +11,22 @@
 
 - **Linux Ubuntu:**
     <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
+	<style>
+	.custom-style {
+		font-size: 18px;
+		color: red;
+	}
+    </style>
+
 
 - **Windows:**
-    <pre><code>ssh-keygen -b 4096 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
+-   <pre>The key will be created in the default setting in the folder C:\Users\&lt;your-username&gt;\.ssh</pre>
+-   <pre class="custom-style"><code>ssh-keygen -t  ed25519 </code></pre>
+-   
+-   <pre style="font-size: 16px; color: blue;">Create in specific name and path</pre>  
+    <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
+    <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
+    <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
 
@@ -128,7 +141,7 @@ kubectl get nodes</code></pre>
 
 **Notes:**
 - Ensure to replace placeholders like `<control-plane-host>`, `<control-plane-port>`, `<token>`, and `<hash>` with your actual values.
-- The HTML used here is for formatting and will be rendered correctly on GitHub, but JavaScript will not run.
+
 
 
 
