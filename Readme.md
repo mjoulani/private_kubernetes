@@ -13,13 +13,9 @@
     <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
 - **Windows:**
--   <pre>The key will be created in the default setting in the folder C:\Users\&lt;your-username&gt;\.ssh</pre>
--   <pre style="font-size: 20px; color: red;"><code>ssh-keygen -t  ed25519 </code></pre>
--   
--   <pre style="font-size: 16px; color: blue;">Create in specific name and path</pre>  
-    <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
-    <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
-    <pre><code>ssh-keygen -t  ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
+    - The key will be created in the default setting in the folder `C:\Users\&lt;your-username&gt;\.ssh`
+    - Create in a specific name and path:
+        <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
 
@@ -134,6 +130,7 @@ kubectl get nodes</code></pre>
 
 **Notes:**
 - Ensure to replace placeholders like `<control-plane-host>`, `<control-plane-port>`, `<token>`, and `<hash>` with your actual values.
+
 
 
 
