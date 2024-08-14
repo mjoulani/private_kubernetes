@@ -14,6 +14,7 @@
 
 - **Windows:**
     - The key will be created in the default setting in the folder `C:\Users\&lt;your-username&gt;\.ssh`
+        <pre><code>ssh-keygen -t ed25519</code></pre> 
     - Create in a specific name and path:
         <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
