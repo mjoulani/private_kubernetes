@@ -10,7 +10,7 @@
 **Example:**
 
 - **Linux Ubuntu:**
-    <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
+    <pre><font size="8" color="blue"><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
 - **Windows:**
     - The key will be created in the default setting in the folder `C:\Users\&lt;your-username&gt;\.ssh`
