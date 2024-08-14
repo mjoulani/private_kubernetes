@@ -11,13 +11,6 @@
 
 - **Linux Ubuntu:**
     <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
-	<style>
-	.custom-style {
-		font-size: 18px;
-		color: red;
-	}
-    </style>
-
 
 - **Windows:**
 -   <pre>The key will be created in the default setting in the folder C:\Users\&lt;your-username&gt;\.ssh</pre>
