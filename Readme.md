@@ -11,26 +11,45 @@
 
 <img src="Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
 <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
-- <img src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **Windows PowerShell  Administrator**
+<img src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **Windows PowerShell  Administrator**
     - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
         <pre><code>ssh-keygen -t ed25519</code></pre> 
     - Create the pair key in a specific name and path:
         <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
+
+ <img src="Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **For Linux Ubuntu:**
 <pre><code>sudo apt install openssh-server</code></pre> 
 <pre><code>sudo apt install openssh-client</code></pre> 
 <pre><code>sudo systemctl start ssh</code></pre> 
 <pre><code>sudo systemctl enable ssh</code></pre> 
 <pre><code>sudo systemctl enable ssh</code></pre> 
-
+**OR**
 <pre><code>sudo apt update
 sudo apt install openssh-server
 sudo apt install openssh-client
 sudo systemctl start ssh
 sudo systemctl enable ssh
 sudo systemctl status ssh</code></pre>
+<img src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **For Windows PowerShell  Administrator:**
 
+**OpenSSH services are off by default:**
+- go to your windoes search bar and type <pre><code>services</code></pre>
+  services windows pop up scroll down and look for OpenSSH server and agent and You must manually set
+  Automatic and Start services.
+- **alternative** go to your windoes search bar and type <pre><code>RUN</code></pre>
+  RUN windows pop up type in run bar <pre><code>services.msc</code></pre>
+  services windows pop up scroll down and look for OpenSSH server and agent and You must manually set
+  Automatic and Start services.
+  
+**Test firewall on Port 22**
+  <pre><code>netstat -na | findstr ":22"</code></pre>
+  **OR**
+  <pre><code></code>netstat -na | Select-String ":22"</pre>
+**use PS to see if firewall rule is in place**
+  <pre><code>Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName,
+Description, Enabled</code></pre>
 ### Copy the Public Key to Your Instances:
 
 After creating the public and private key pair, copy the public key to your instances (master and node1) using the following command:
