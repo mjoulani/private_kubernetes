@@ -47,11 +47,11 @@ sudo systemctl status ssh</code></pre>
   <pre><code>netstat -na | findstr ":22"</code></pre>
   **OR**
   <pre><code></code>netstat -na | Select-String ":22"</pre>
-  <img src="prot22.png" alt="Port 22" width="800"/>
+  <img src="prot22.png" alt="Port 22" width="600"/>
 **use PS to see if firewall rule is in place**
   <pre><code>Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName,
 Description, Enabled</code></pre>
-<img src="microsoft icon.png" alt="Ubuntu Logo" width="20"/>
+<img src="sshd_status.png" alt="sshd status" width="600"/>
 
 ### Copy the Public Key to Your Instances:
 
