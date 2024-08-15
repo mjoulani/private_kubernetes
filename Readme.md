@@ -9,24 +9,28 @@
 
 **Example:**
 
-- **Linux Ubuntu:**
+- ![#1589F0]**Linux Ubuntu:**
     <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
 - **Windows:**
-    - The key will be created in the default setting in the folder `C:\Users\&lt;your-username&gt;\.ssh`
+    - The pair key will be created in the default setting in the folder C:\Users\&lt;your-username&gt;\.ssh
         <pre><code>ssh-keygen -t ed25519</code></pre> 
-    - Create in a specific name and path:
+    - Create the pair key in a specific name and path:
         <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
+- ![#1589F0]**Windows**
+<pre><code>sudo apt install openssh-server</code></pre> 
+<pre><code>sudo apt install openssh-server</code></pre> 
+<pre><code>sudo systemctl start ssh</code></pre> 
+<pre><code>sudo systemctl start ssh</code></pre> 
 
 <pre><code>sudo apt update
 sudo apt install openssh-server
 sudo apt install openssh-client
-
 sudo systemctl start ssh
 sudo systemctl enable ssh
-sudo systemctl status ssh</code></pre>
+sudo systemctl start ssh</code></pre>
 
 ### Copy the Public Key to Your Instances:
 
