@@ -8,8 +8,9 @@
 2. Run the command `ssh-keygen -b 4096` and provide a name for the key and the path. In my case, I stored it in `~/.ssh/`.
 
 **Example:**
-
-- <span style="color:blue">**Linux Ubuntu:**</span>
+'''diff
+- -**Linux Ubuntu:**
+  '''
     <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
 - **Windows:**
