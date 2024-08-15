@@ -9,17 +9,17 @@
 
 **Example:**
 
-- ![#1589F0]**Linux Ubuntu:**
-    <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
+- #1589F0**Linux Ubuntu:**
+    <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
 - **Windows:**
-    - The pair key will be created in the default setting in the folder C:\Users\&lt;your-username&gt;\.ssh
+    - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
         <pre><code>ssh-keygen -t ed25519</code></pre> 
     - Create the pair key in a specific name and path:
         <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
-- ![#1589F0]**Windows**
+- #1589F0**Windows**
 <pre><code>sudo apt install openssh-server</code></pre> 
 <pre><code>sudo apt install openssh-server</code></pre> 
 <pre><code>sudo systemctl start ssh</code></pre> 
