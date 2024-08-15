@@ -8,30 +8,27 @@
 2. Run the command `ssh-keygen -b 4096` and provide a name for the key and the path. In my case, I stored it in `~/.ssh/`.
 
 **Example:**
-'''diff
-- -**Linux Ubuntu:**
-  '''
-    <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
-- **Windows:**
+<img src="https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
+- **Windows PowerShell  Administrator**
     - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
         <pre><code>ssh-keygen -t ed25519</code></pre> 
     - Create the pair key in a specific name and path:
         <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
-- #1589F0**Windows**
 <pre><code>sudo apt install openssh-server</code></pre> 
-<pre><code>sudo apt install openssh-server</code></pre> 
+<pre><code>sudo apt install openssh-client</code></pre> 
 <pre><code>sudo systemctl start ssh</code></pre> 
-<pre><code>sudo systemctl start ssh</code></pre> 
+<pre><code>sudo systemctl enable ssh</code></pre> 
+<pre><code>sudo systemctl enable ssh</code></pre> 
 
 <pre><code>sudo apt update
 sudo apt install openssh-server
 sudo apt install openssh-client
 sudo systemctl start ssh
 sudo systemctl enable ssh
-sudo systemctl start ssh</code></pre>
+sudo systemctl status ssh</code></pre>
 
 ### Copy the Public Key to Your Instances:
 
@@ -136,4 +133,3 @@ kubectl get nodes</code></pre>
 
 **Notes:**
 - Ensure to replace placeholders like `<control-plane-host>`, `<control-plane-port>`, `<token>`, and `<hash>` with your actual values.
-
