@@ -9,7 +9,7 @@
 
 **Example:**
 
-- #1589F0**Linux Ubuntu:**
+- <span style="color:blue">**Linux Ubuntu:**</span>
     <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 
 - **Windows:**
