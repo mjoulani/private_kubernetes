@@ -72,6 +72,7 @@ Description, Enabled</code></pre>
    
 4. The hidden folder ProgramData will be unhidden the path "c:\ProgramData\ssh\sshd_config",you must open the file
     sshd_config as Notepad administrator so you can save the changes
+
    <a href="images/sshd_config.png">
       <img src="images/sshd_config.png" alt="sshd_config" width="400" height="250" />
    </a>
@@ -79,7 +80,7 @@ Description, Enabled</code></pre>
       <a href="images/sshd_config.png"><sub>Expand Image</sub></a>
     </p>
             
-5. Opening the notepad as administrator as show below
+6. Opening the notepad as administrator as show below
    <a href="images/sshd_config.png">
       <img src="images/run notepad as administrator.png" alt="notepad_editor" width="600" height="250"/>
    </a>
@@ -87,7 +88,7 @@ Description, Enabled</code></pre>
       <a href="images/run notepad as administrator.pn"><sub>Expand Image</sub></a>
    </p>
     
-6. when you open the file sshd_config you can keep it as defaulet or change the setiing as show below
+7. when you open the file sshd_config you can keep it as defaulet or change the setiing as show below
    <a href="images/sshd_config_context.png">
       <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150" />
    </a>
@@ -127,7 +128,7 @@ Description, Enabled</code></pre>
 
      <img src="images/notepad_command.png" alt="rub_command_editor" width="1000" height="250"/>
   7. exit and save
-
+---
 ### Copy the Public Key to Your Instances:
 
 After creating the public and private key pair, copy the public key to your instances (master and node1) using the following command:
