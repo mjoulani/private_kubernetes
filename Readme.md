@@ -11,11 +11,11 @@
 
 <img src="Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
 <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
-<img src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **Windows PowerShell  Administrator**
+<img src="microsoft icon.png" alt="Ubuntu Logo" width="20" /> **Windows PowerShell  Administrator**
     - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
         <pre><code>ssh-keygen -t ed25519</code></pre> 
     - Create the pair key in a specific name and path:
-        <pre><code>ssh-keygen -t ed25519 -f C:\Users\&lt;your-username&gt;\.ssh\&lt;give-name-for-file&gt;</code></pre>
+        <pre><code>ssh-keygen -t ed25519 -f C:\Users\\&lt;your-username&gt;\.ssh\\&lt;give-name-for-file&gt;</code></pre>
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
 
@@ -47,11 +47,15 @@ sudo systemctl status ssh</code></pre>
   <pre><code>netstat -na | findstr ":22"</code></pre>
   **OR**
   <pre><code></code>netstat -na | Select-String ":22"</pre>
-  <img src="prot22.png" alt="Port 22" width="600"/>
+  <img src="prot22.png" alt="Port 22" width="600" height="200"/>
 **use PS to see if firewall rule is in place**
   <pre><code>Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName,
 Description, Enabled</code></pre>
-<img src="sshd_status.png" alt="sshd status" width="600"/>
+<img src="sshd_status.png" alt="sshd status" width="600" height="200"/>
+**Editing OpenSSH server: sshd_config:**
+- Mothed one to edit sshd_config by Windows GUI:
+  1. enble the option hiiden file, type in windows searh bar <pre><code>File Explorer Options</pre></code>
+     
 
 ### Copy the Public Key to Your Instances:
 
