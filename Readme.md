@@ -54,9 +54,38 @@ Description, Enabled</code></pre>
 <img src="images/sshd_status.png" alt="sshd status" width="600" height="200"/>
 **Editing OpenSSH server: sshd_config:**
 - Mothed one to edit sshd_config by Windows GUI:
-  1. enble the option hiiden file, type in windows searh bar <pre><code>File Explorer Options</pre></code>
-     
-
+- 
+  1. enble the option hidden file, type in windows searh bar <pre><code>File Explorer Options</pre></code>
+  2. windows File Explorer Options pop up
+     <img src="images/file_explorer_option.png" alt="file_explorer" width="200" height="250"/>
+  3. Choose Veiw and select Show hidden file or folder option
+     <img src="images/hidden file.png" alt="sshd hidden_file" width="200" height="250"/>
+  4. The hidden folder ProgramData will be unhidden the path c:\ProgramData\ssh\sshd_config
+     you open the file sshd_config as Notepad administrator so you can save the changes
+     <img src="images/sshd_config.png" alt="sshd_config" width="200" height="250"/>
+  5. Opening the notepad as administrator as show below
+     <img src="images/run notepad as administrator.png" alt="notepad_editor" width="200" height="250"/>
+  6. when you open the file sshd_config you can keep it as defaulet or change the setiing as show below
+     <img src="images/sshd_config_context.png" alt="sshd_config_context" width="200" height="250"/>
+     set the sshd_config as show below
+     <img src="images/sshd_config_context.png" alt="sshd_config_context" width="200" height="250"/>
+     save and exit.
+     By setting the sshd_config in your the host machine and the other machine you can ssh all the machine
+- Mothed two to edit sshd_config by Windows PowerShell:
+  1. type in windows search command PowerShell and the icon PowerShell show
+     <pre><code>PowerShell</code></pre>
+     <img src="images/hidden file.png" alt="sshd status" width="200" height="250"/>
+  2. right click of the mouse on the powerShell icon and select Run as administrator
+     <img src="images/hidden file.png" alt="sshd status" width="200" height="250"/>
+  3. windows PoweShell pop up cd to ProgramData\ssh cd "ProgramData\ssh\"
+     <pre><code>cd c:\ProgramData\ssh</code></pre>
+  4. the PowerShell should look like C:\ProgramData\ssh\
+     <img src="images/hidden file.png" alt="sshd status" width="200" height="250"/>
+  5. enter this command:
+     <pre><code>notepad sshd_config</code></pre>
+  6. set the sshd_con as show below
+     <img src="images/sshd_config_context.png" alt="sshd status" width="200" height="250"/>
+  7. exit and save
 ### Copy the Public Key to Your Instances:
 
 After creating the public and private key pair, copy the public key to your instances (master and node1) using the following command:
