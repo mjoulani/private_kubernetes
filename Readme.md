@@ -32,7 +32,8 @@ sudo apt install openssh-client
 sudo systemctl start ssh
 sudo systemctl enable ssh
 sudo systemctl status ssh</code></pre>
-<img images/src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **For Windows PowerShell  Administrator:**
+----
+<img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **For Windows PowerShell  Administrator:**
 
 **OpenSSH services are off by default:**
 - go to your windoes search bar and type <pre><code>services</code></pre>
@@ -48,77 +49,83 @@ sudo systemctl status ssh</code></pre>
   **OR**
   <pre><code></code>netstat -na | Select-String ":22"</pre>
   <img src="images/prot22.png" alt="Port 22" width="600" height="200"/>
+  
 **use PS to see if firewall rule is in place**
   <pre><code>Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName,
 Description, Enabled</code></pre>
 <img src="images/sshd_status.png" alt="sshd status" width="600" height="200"/>
-**Editing OpenSSH server: sshd_config:**
-- Mothed one to edit sshd_config by Windows GUI:
-  1. enble the option hidden file, type in windows searh bar <pre><code>File Explorer Options</pre></code>
-  2. windows File Explorer Options pop up
-     <img src="images/file_explorer_option.png" alt="file_explorer" width="200" height="250"/>
-  3. Choose Veiw and select Show hidden file or folder option
-     <img src="images/hidden file.png" alt="sshd hidden_file" width="200" height="250"/>
-  4. The hidden folder ProgramData will be unhidden the path "c:\ProgramData\ssh\sshd_config",you must open the file sshd_config  
-     as Notepad administrator so you can save the changes
-         <p align="center">
-          <a href="images/sshd_config.png">
-            <img src="images/sshd_config.png" alt="sshd_config" width="400" height="250" />
-          </a>
-        </p>
-        <p align="center">
-          <a href="images/sshd_config.png"><sub>Expand Image</sub></a>
-        </p>
-        
-  5. Opening the notepad as administrator as show below
-     <p align="center">
-          <a href="images/sshd_config.png">
-            <img src="images/run notepad as administrator.png" alt="notepad_editor" width="600" height="250"/>
-          </a>
-     </p>
-     <p align="center">
-          <a href="images/run notepad as administrator.pn"><sub>Expand Image</sub></a>
-     </p>
 
-  6. when you open the file sshd_config you can keep it as defaulet or change the setiing as show below
-      <p align="center">
-          <a href="images/sshd_config.png">
-            <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150"/>
-          </a>
-     </p>
-     <p align="center">
-          <a href="images/sshd_config_context.png"><sub>Expand Image</sub></a>
-     </p>
-     
-     set the sshd_config as show below
-     
-     <p align="center">
-          <a href="images/sshd_config.png">
-            <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150"/>
-          </a>
-     </p>
-     <p align="center">
-          <a href="images/sshd_config_context.png"><sub>Expand Image</sub></a>
-     </p>
-     
-     save and exit.
-     
-     By setting the sshd_config in your the host machine and the other machine you can ssh all the machine
 ---
-- Mothed two to edit sshd_config by Windows PowerShell:
+**Editing OpenSSH server: sshd_config:**
+
+- Method one to edit sshd_config by Windows GUI:
+
+1. enble the option hidden file, type in windows searh bar <pre><code>File Explorer Options</pre></code>
+
+2. windows File Explorer Options pop up
+
+   <img src="images/file_explorer_option.png" alt="file_explorer" width="200" height="250"/>
+   
+3. Choose Veiw and select Show hidden file or folder option
+
+   <img src="images/hidden file.png" alt="sshd hidden_file" width="200" height="250"/>
+   
+4. The hidden folder ProgramData will be unhidden the path "c:\ProgramData\ssh\sshd_config",you must open the file
+    sshd_config as Notepad administrator so you can save the changes
+   <a href="images/sshd_config.png">
+      <img src="images/sshd_config.png" alt="sshd_config" width="400" height="250" />
+   </a>
+   <p align="left">
+      <a href="images/sshd_config.png"><sub>Expand Image</sub></a>
+    </p>
+            
+5. Opening the notepad as administrator as show below
+   <a href="images/sshd_config.png">
+      <img src="images/run notepad as administrator.png" alt="notepad_editor" width="600" height="250"/>
+   </a>
+   <p align="left">
+      <a href="images/run notepad as administrator.pn"><sub>Expand Image</sub></a>
+   </p>
+    
+6. when you open the file sshd_config you can keep it as defaulet or change the setiing as show below
+   <a href="images/sshd_config_context.png">
+      <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150" />
+   </a>
+   <p align="left">
+      <a href="images/sshd_config_context.png"><sub>Expand Image</sub></a>
+   </p>
+         
+   set the sshd_config as show below
+         
+   <a href="images/sshd_config_context.png">
+        <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150" />
+    </a>
+    <p align="left">
+        <a href="images/sshd_config_context.png"><sub>Expand Image</sub></a>
+    </p>
+    
+   save and exit.
+         
+   By setting the sshd_config in your the host machine and the other machine you can ssh all the machine
+---
+   **Mothed two to edit sshd_config by Windows PowerShell:**
   1. type in windows search command PowerShell and the icon PowerShell show
      <pre><code>PowerShell</code></pre>
-     <img src="images/windows_search_bar.png" alt="windows search bar" width="200" height="150"/>
+
+     <img src="images/windows_search_bar.png" alt="windows search bar" width="400" height="150"/>
   2. right click of the mouse on the powerShell icon and select Run as administrator
-     <img src="images/run notepad as administrator.png" alt="choose as admin" width="200" height="150"/>
+
+     <img src="images/run notepad as administrator.png" alt="choose as admin" width="450" height="400"/>
   3. windows PoweShell pop up cd to ProgramData\ssh cd "ProgramData\ssh\"
      <pre><code>cd c:\ProgramData\ssh</code></pre>
   4. the PowerShell should look like this C:\ProgramData\ssh\
-     <img src="images/windows_shell.png" alt="power_shell_editor" width="200" height="150"/>
+
+     <img src="images/windows_shell.png" alt="power_shell_editor" width="450" height="450"/>
   5. enter this command:
      <pre><code>notepad sshd_config</code></pre>
   6. set the sshd_con as show below
-     <img src="images/windows_shell.png" alt="rub_command_editor" width="200" height="250"/>
+
+     <img src="images/notepad_command.png" alt="rub_command_editor" width="1000" height="250"/>
   7. exit and save
 
 ### Copy the Public Key to Your Instances:
