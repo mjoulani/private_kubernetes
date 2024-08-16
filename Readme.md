@@ -9,9 +9,9 @@
 
 **Example:**
 
-<img src="Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
+<img src="images/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
 <pre><code>#1589F0ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
-<img src="microsoft icon.png" alt="Ubuntu Logo" width="20" /> **Windows PowerShell  Administrator**
+<img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **Windows PowerShell  Administrator**
     - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
         <pre><code>ssh-keygen -t ed25519</code></pre> 
     - Create the pair key in a specific name and path:
@@ -19,7 +19,7 @@
 
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
 
- <img src="Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **For Linux Ubuntu:**
+ <img src="images/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **For Linux Ubuntu:**
 <pre><code>sudo apt install openssh-server</code></pre> 
 <pre><code>sudo apt install openssh-client</code></pre> 
 <pre><code>sudo systemctl start ssh</code></pre> 
@@ -32,7 +32,7 @@ sudo apt install openssh-client
 sudo systemctl start ssh
 sudo systemctl enable ssh
 sudo systemctl status ssh</code></pre>
-<img src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **For Windows PowerShell  Administrator:**
+<img images/src="microsoft icon.png" alt="Ubuntu Logo" width="20"/> **For Windows PowerShell  Administrator:**
 
 **OpenSSH services are off by default:**
 - go to your windoes search bar and type <pre><code>services</code></pre>
@@ -47,11 +47,11 @@ sudo systemctl status ssh</code></pre>
   <pre><code>netstat -na | findstr ":22"</code></pre>
   **OR**
   <pre><code></code>netstat -na | Select-String ":22"</pre>
-  <img src="prot22.png" alt="Port 22" width="600" height="200"/>
+  <img src="images/prot22.png" alt="Port 22" width="600" height="200"/>
 **use PS to see if firewall rule is in place**
   <pre><code>Get-NetFirewallRule -Name *OpenSSH-Server* |select Name, DisplayName,
 Description, Enabled</code></pre>
-<img src="sshd_status.png" alt="sshd status" width="600" height="200"/>
+<img src="images/sshd_status.png" alt="sshd status" width="600" height="200"/>
 **Editing OpenSSH server: sshd_config:**
 - Mothed one to edit sshd_config by Windows GUI:
   1. enble the option hiiden file, type in windows searh bar <pre><code>File Explorer Options</pre></code>
