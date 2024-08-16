@@ -89,6 +89,7 @@ Description, Enabled</code></pre>
    </p>
     
 7. when you open the file sshd_config you can keep it as defaulet or change the setiing as show below
+   
    <a href="images/sshd_config_context.png">
       <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150" />
    </a>
@@ -96,7 +97,7 @@ Description, Enabled</code></pre>
       <a href="images/sshd_config_context.png"><sub>Expand Image</sub></a>
    </p>
          
-   set the sshd_config as show below
+8. set the sshd_config as show below
          
    <a href="images/sshd_config_context.png">
         <img src="images/sshd_config_context.png" alt="sshd_config_context" width="400" height="150" />
