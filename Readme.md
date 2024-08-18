@@ -12,7 +12,6 @@
 <img src="images/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
 <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 <img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **Windows PowerShell  Administrator**
-
     - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
        <pre><code>ssh-keygen -t ed25519</code></pre>    
     - Create the pair key in a specific name and path:
@@ -36,7 +35,7 @@ sudo systemctl status ssh</code></pre>
 ----
 <img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **For Windows PowerShell  Administrator:**
 
-# OpenSSH services are off by default
+# **OpenSSH services are off by default:**
 - go to your windoes search bar and type <pre><code>services</code></pre>
   services windows pop up scroll down and look for OpenSSH server and agent and You must manually set
   Automatic and Start services.
