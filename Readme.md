@@ -35,7 +35,7 @@ sudo systemctl status ssh</code></pre>
 ----
 <img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **For Windows PowerShell  Administrator:**
 
-# **OpenSSH services are off by default:**
+### **OpenSSH services are off by default:**
 - go to your windoes search bar and type <pre><code>services</code></pre>
   services windows pop up scroll down and look for OpenSSH server and agent and You must manually set
   Automatic and Start services.
