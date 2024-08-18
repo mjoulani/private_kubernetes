@@ -12,11 +12,11 @@
 <img src="images/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
 <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
 <img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **Windows PowerShell  Administrator**
-    - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
-       <pre><code>ssh-keygen -t ed25519</code></pre>    
-    - Create the pair key in a specific name and path:
-        <pre><code>ssh-keygen -t ed25519 -f C:\Users\\&lt;your-username&gt;\.ssh\\&lt;give-name-for-file&gt;</code></pre>
-
+- The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
+<pre><code>ssh-keygen -t ed25519</code></pre>
+- Create the pair key in a specific name and path:
+<pre><code>ssh-keygen -t ed25519 -f C:\Users\\&lt;your-username&gt;\.ssh\\&lt;give-name-for-file&gt;</code></pre>
+        
 **Note:** Make sure OpenSSH client is installed on both Linux and Windows:
 
  <img src="images/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **For Linux Ubuntu:**
@@ -43,6 +43,8 @@ sudo systemctl status ssh</code></pre>
   RUN windows pop up type in run bar <pre><code>services.msc</code></pre>
   services windows pop up scroll down and look for OpenSSH server and agent and You must manually set
   Automatic and Start services.
+  
+  <img src="images/services.png" alt="Ubuntu Logo" width="300" height="250" />
   
 **Test firewall on Port 22**
   <pre><code>netstat -na | findstr ":22"</code></pre>
@@ -133,7 +135,50 @@ Description, Enabled</code></pre>
 **Register private key**
 
 #### **ssh-agent**:
-1. make sure the ssh-agent enable and at Automatic and Start status, check [OpenSSH services are off by default](#openssh-services-are-off-by-default)
+1. make sure the ssh-agent enable and at Automatic and Start status, check [OpenSSH services are off by default](#openssh-services-
+   are-off-by-default)
+2. if the ssh-agent is disable you use services as explain before or you can run this command in PowerShell as adminisrator
+   <pre><code>Get-Service ssh-agent | Set-Service -StartupType Automatic</code></pre>
+3. Start the service
+   <pre><code>Start the service</code></pre>
+4. Check status of service
+   <pre><code>Get-Service ssh-agent</code></pre>
+<img src="images/prot22.png" alt="Port 22" width="600" height="200"/>
+
+---
+### **Register private key with ssh-agent**
+- Now load your key files into ssh-agent
+  <pre><code>ssh-add $env:USERPROFILE\.ssh\id_ed25519</code></pre>
+  **OR**
+  <pre><code>ssh-add $env:USERPROFILE\.ssh\&lt;code>your private-key&gt;</code></pre>
+  ![registor_key](https://github.com/user-attachments/assets/8e06328d-1efb-453a-b7dd-c01de5c13286)
+---
+### **Deploying the public key**
+- Get the public key file generated previously on your client
+  <pre><code>$authorizedKey = Get-Content -Path "$env:USERPROFILE\.ssh\id_ed25519.pub"</code></pre>
+  **OR
+   <pre><code>$authorizedKey = Get-Content -Path "$env:USERPROFILE\.ssh\&lt;your public-key&gt;</code></pre>
+- Generate the PowerShell to be run remote that will copy the public key file
+  generated previously on your client to the authorized_keys file on your
+  server.
+<pre><code>$authorizedKey = Get-Content -Path "$env:USERPROFILE\.ssh\id_ed25519.pub"; powershell -Command "Add-Content -Force -Path '$env:ProgramData\ssh\administrators_authorized_keys' -Value '$authorizedKey'; icacls.exe '$env:ProgramData\ssh\administrators_authorized_keys' /inheritance:r /grant 'Administrators:F' /grant 'SYSTEM:F'"
+</code></pre>
+
+**OR**
+
+<pre><code>$authorizedKey = Get-Content -Path "$env:USERPROFILE\.ssh\/&lt;your public-key&gt;"; powershell -Command "Add-Content -Force -Path '$env:ProgramData\ssh\administrators_authorized_keys' -Value '$authorizedKey'; icacls.exe '$env:ProgramData\ssh\administrators_authorized_keys' /inheritance:r /grant 'Administrators:F' /grant 'SYSTEM:F'"
+</code></pre>
+
+<img src="images/prot22.png" alt="Port 22" width="200" />
+- Login to OpenSSH server host:
+  <pre><code></code>ssh username@domain@host $remotePowershell</pre></code>
+  for the first time and for last time it will asked for password
+  <img src="images/prot22.png" alt="Port 22" width="200" />
+  
+  login again but this time **`without the $remotePowershell`**
+  
+  ssh username@domain@host
+  
 ---
 ### Copy the Public Key to Your Instances:
 
