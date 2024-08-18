@@ -143,7 +143,7 @@ Description, Enabled</code></pre>
    <pre><code>Start the service</code></pre>
 4. Check status of service
    <pre><code>Get-Service ssh-agent</code></pre>
-<img src="images/prot22.png" alt="Port 22" width="600" height="200"/>
+<img src="images/agen-setup.png" alt="ssh-agent" width="600" height="200"/>
 
 ---
 ### **Register private key with ssh-agent**
@@ -151,7 +151,8 @@ Description, Enabled</code></pre>
   <pre><code>ssh-add $env:USERPROFILE\.ssh\id_ed25519</code></pre>
   **OR**
   <pre><code>ssh-add $env:USERPROFILE\.ssh\&lt;code>your private-key&gt;</code></pre>
-  ![registor_key](https://github.com/user-attachments/assets/8e06328d-1efb-453a-b7dd-c01de5c13286)
+  
+  <img src="images/registor_key.png" alt="reg-key" width="600" hight="200" />
 ---
 ### **Deploying the public key**
 - Get the public key file generated previously on your client
@@ -168,12 +169,11 @@ Description, Enabled</code></pre>
 
 <pre><code>$authorizedKey = Get-Content -Path "$env:USERPROFILE\.ssh\/&lt;your public-key&gt;"; powershell -Command "Add-Content -Force -Path '$env:ProgramData\ssh\administrators_authorized_keys' -Value '$authorizedKey'; icacls.exe '$env:ProgramData\ssh\administrators_authorized_keys' /inheritance:r /grant 'Administrators:F' /grant 'SYSTEM:F'"
 </code></pre>
-
-<img src="images/prot22.png" alt="Port 22" width="200" />
 - Login to OpenSSH server host:
   <pre><code></code>ssh username@domain@host $remotePowershell</pre></code>
   for the first time and for last time it will asked for password
-  <img src="images/prot22.png" alt="Port 22" width="200" />
+  
+  <img src="images/ssh_host.png" width="600" hight="200"/>
   
   login again but this time **`without the $remotePowershell`**
   
