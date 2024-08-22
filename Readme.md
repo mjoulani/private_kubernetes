@@ -209,9 +209,9 @@ Make a backup or snapshot before you start using the Proxmox console.
     <pre><code>sudo apt install docker.io -y</code></pre>
 
 5. Add your user to the Docker group:
-    <pre><code>newgrp docker
-sudo usermod -aG docker mjoulani
-sudo chmod 666 /var/run/docker.sock</code></pre>
+    <pre><code>newgrp docker </code></pre>
+    <pre><code>sudo usermod -aG docker mjoulani</code></pre>
+    <pre><code>sudo chmod 666 /var/run/docker.sock</code></pre>
 
 6. Install `curl` (if not already installed):
     <pre><code>curl --version</code></pre>
@@ -242,9 +242,9 @@ sudo chmod 666 /var/run/docker.sock</code></pre>
         <pre><code>sudo kubeadm init</code></pre>
 
     c. Configure kubectl:
-        <pre><code>mkdir -p $HOME/.kube
-sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
-sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
+        <pre><code>mkdir -p $HOME/.kube</code></pre>
+        <pre><code>sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config</code></pre>
+        <pre><code>sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
 
     Alternatively, as root:
         <pre><code>export KUBECONFIG=/etc/kubernetes/admin.conf</code></pre>
@@ -253,19 +253,26 @@ sudo chown $(id -u):$(id -g) $HOME/.kube/config</code></pre>
         <pre><code>kubectl apply -f https://docs.projectcalico.org/manifests/calico.yaml</code></pre>
 
     e. Check the status:
-        <pre><code>kubectl get pods -n kube-system
-kubectl get nodes</code></pre>
+        <pre><code>kubectl get pods -n kube-system</code></pre>
+        <pre><code>kubectl get nodes</code></pre>
         Note: Wait for 5 minutes or more until the nodes are ready. Visit <a href="https://docs.tigera.io/">Tigera Documentation</a> and <a href="https://github.com/projectcalico/calico/blob/master/manifests/calico.yaml">Calico Manifest</a>.
 
 11. Setup the Worker Node:
 
     Join the cluster using the command provided by `kubeadm init`:
+    when the kubeadm init finshed the initialization of the master control node  it give the command `join` node 
+    with token and discovery-token-ca-cert-hash so copy the command and save it somewhere in your hostmachine 
     <pre><code>sudo kubeadm join &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</code></pre>
+    
+    Command deleted or lost:
+     - sudo cat /etc/kubernetes/admin.conf | grep server  
+    
 
-12. Manage Node Labels:
+13. Manage Node Labels:
 
     a. Add a label to a node:
-        <pre><code>kubectl label nodes node1 role=worker-one</code></pre>
+        <pre><code>kubectl get nodes</code></pre>
+        <pre><code>kubectl label nodes &lt;NAME of the node&gt; role=&lt;new label name&gt;</code></pre>
 
     b. List nodes with labels:
         <pre><code>kubectl get nodes --show-labels</code></pre>
@@ -273,13 +280,13 @@ kubectl get nodes</code></pre>
     Alternatively, you can:
 
     - **Add Labels:**
-        <pre><code>kubectl label nodes node1 node-role.kubernetes.io/&lt;name-of-label&gt;=</code></pre>
+        <pre><code>kubectl label nodes &lt;NAME of the node&gt; node-role.kubernetes.io/&lt;name-of-label&gt;=</code></pre>
 
     - **Show Labels:**
         <pre><code>kubectl get nodes --show-labels</code></pre>
 
     - **Remove Labels:**
-        <pre><code>kubectl label nodes node1 node-role.kubernetes.io/&lt;name-of-label&gt;-</code></pre>
+        <pre><code>kubectl label nodes &lt;NAME of the node&gt node-role.kubernetes.io/&lt;name-of-label&gt;-</code></pre>
 
 **Notes:**
 - Ensure to replace placeholders like `<control-plane-host>`, `<control-plane-port>`, `<token>`, and `<hash>` with your actual values.
