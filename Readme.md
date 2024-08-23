@@ -11,6 +11,11 @@
 
 <img src="images/Logo-ubuntu_cof-orange-hex.svg" alt="Ubuntu Logo" width="20"/> **Linux Ubuntu:**
 <pre><code>ssh-keygen -b 4096 -f ~/.ssh/&lt;give-name-for-file&gt;</code></pre>
+
+Copy Your Public Key to the Remote Machine:
+<pre><code>ssh-copy-id remote-username@remote-machine-ip-or-hostname</code></pre>
+Test SSH Access:
+<pre><code>ssh remote-username@remote-machine-ip-or-hostname</code></pre>
 <img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **Windows PowerShell  Administrator**
 - The pair key will be created in the default setting in the folder C:\Users\\&lt;your-username&gt;\.ssh
 <pre><code>ssh-keygen -t ed25519</code></pre>
@@ -35,6 +40,17 @@ sudo systemctl status ssh</code></pre>
 ----
 <img src="images/microsoft icon.png" alt="Ubuntu Logo" width="20" /> **For Windows PowerShell  Administrator:**
 
+### **Install OpenSSH Server and Client:**
+- Install OpenSSH Server:
+- <pre><code>Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0</code></pre>
+- Install OpenSSH Client (if not already installed)
+- <pre><code>Add-WindowsCapability -Online -Name OpenSSH.Client~~~~0.0.1.0</code></pre>
+- Start the SSH Server service
+- <pre><code>Start-Service -Name sshd</code></pre>
+- Enable SSH Server to start automatically with the system
+- <pre><code>Set-Service -Name sshd -StartupType 'Automatic'</code></pre>
+- Check the status of the SSH Server service
+- <pre><code>Get-Service -Name sshd</code></pre>
 ### **OpenSSH services are off by default:**
 - go to your windoes search bar and type <pre><code>services</code></pre>
   services windows pop up scroll down and look for OpenSSH server and agent and You must manually set
@@ -195,7 +211,11 @@ For example:
 Make a backup or snapshot before you start using the Proxmox console.
 
 ## Start Creating the Cluster:
+Proxmax must be instelled and running
 
+create two VM instances at least running Ubuntu or distributed  yor prefer 
+
+---
 1. Connect to the master node and node1.
 2. Disable swap for all instances:
     <pre><code>sudo swapoff -a</code></pre>
@@ -264,8 +284,15 @@ Make a backup or snapshot before you start using the Proxmox console.
     with token and discovery-token-ca-cert-hash so copy the command and save it somewhere in your hostmachine 
     <pre><code>sudo kubeadm join &lt;control-plane-host&gt;:&lt;control-plane-port&gt; --token &lt;token&gt; --discovery-token-ca-cert-hash sha256:&lt;hash&gt;</code></pre>
     
-    Command deleted or lost:
-     - sudo cat /etc/kubernetes/admin.conf | grep server  
+    Command join deleted or lost:
+     - get the ip and the port 'control-plane-host:control-plane-port'
+     - <pre><code>sudo cat /etc/kubernetes/admin.conf | grep server</code></pre>
+     - generate new token
+     - <pre><code>sudo kubeadm token create</code></pre>
+     - Get the Discovery Token CA Cert Hash:
+     - <pre><code>openssl x509 -pubkey -in /etc/kubernetes/pki/ca.crt | openssl rsa -pubin -outform der 2>/dev/null 
+       | openssl dgst -sha256 -hex | sed 's/^.* //'</code></pre>
+       This will output the CA cert hash, which you need for the --discovery-token-ca-cert-hash flag.
     
 
 13. Manage Node Labels:
@@ -290,3 +317,36 @@ Make a backup or snapshot before you start using the Proxmox console.
 
 **Notes:**
 - Ensure to replace placeholders like `<control-plane-host>`, `<control-plane-port>`, `<token>`, and `<hash>` with your actual values.
+
+---
+## Start Creating the Cluster PowerShell(wsl):
+Ensure SSH in PowerShell is active and ready so you can manage processes on the host machine. Install WSL2 on all host machines if needed. In PowerShell, run this command to mirror the IP of PowerShell to WSL. This step is crucial, as the mirroring command is only supported in Windows 11. For Windows 10, you must use other methods like port forwarding.
+creating and running the mirror command:
+- create file .wslconfig in  c:\User\&lt;hostname&lt;\.wslconfig
+- easy run the command:
+- <pre><ode>wsl sudo nano /mnt/c/Users/&lt;hostname&lt;/.wslconfig</ode></pre>
+- copy and past the command line:
+- <pre><code> [wsl2]
+   networkingMode=mirrored
+  </code></pre>
+ - exit and save
+ - shutdown the distributed ubuntu
+ - <pre><code>wsl --shutdown ubuntu</code></pre>
+ - wait 8 seconds
+ - login in the wsl Ubuntn
+ - <pre><code>wsl -d Ubuntu</code></pre> 
+ - check if the IP address of wsl Ubuntu is the same as the IP address of PowerShell
+ - For PowerShell:
+ - <pre><code>ipconfig</code></pre>
+ - For wsl Ubuntu:
+ - <pre><code>ip a</code></pre>
+
+"Check the IP address. If it matches, we're ready to create the Kubernetes cluster.
+
+Note: These steps apply to all host machines running PowerShell.
+
+The steps we previously covered for Proxmox VM instances running Ubuntu will be the same, so repeat them."
+ 
+
+
+
